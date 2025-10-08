@@ -1,0 +1,74 @@
+name: Go Test and Build
+
+on:
+  pull_request:
+    branches: [ main, staging, dev ]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: 'ahmadrafi01'
+          MYSQL_DATABASE: 'scholair_db'
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.23.1' 
+
+    - name: Create config.toml for testing
+      run: |
+        cat <<EOF > server/config.toml
+        [server]
+        app_name="go-modular"
+        mode = "info"
+        port = "8080"
+        http_timeout = 60
+        cache_expired = 24
+        cache_purged = 60
+        api_version = "1"
+
+        [database]
+        db_driver = "mysql"
+        db_host = "127.0.0.1"
+        db_port = "3306"
+        db_name = "scholair_db"
+        db_username = "root"
+        db_password = "ahmadrafi01"
+
+        [pool]
+        conn_idle = 10
+        conn_max = 100
+        conn_lifetime = 60
+
+        [jwt]
+        day_expired = 60
+        signature_key = "4WSRLWxJdm"
+        EOF
+
+    - name: Install dependencies
+      run: go mod tidy
+      working-directory: ./server
+
+    - name: Run tests
+      run: go test -v ./...
+      working-directory: ./server
+
+    - name: Build
+      run: go build -v -o myapp main.go
+      working-directory: ./server
