@@ -1,168 +1,92 @@
-import { useState, useRef, useEffect } from "react";
-import { useAuth } from "@/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import InputForm from "../element/Input/Index";
-import { Button } from "../ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Terminal } from "lucide-react";
+import React, { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-function FormRegister() {
-  const { register, loading, error } = useAuth();
-  const [profile, setProfile] = useState<{
-    fullname: string;
-    phoneNumber: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    profilePhoto: File | null;
-  }>({
-    fullname: "",
-    phoneNumber: "",
+const FormRegister = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    nisn: "",
+    jurusan: "",
+    kelas: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    profilePhoto: null,
   });
 
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [profilePreview, setProfilePreview] = useState<string | null>(null);
-  const [validationError, setValidationError] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  useEffect(() => {
-    return () => {
-      if (profilePreview) URL.revokeObjectURL(profilePreview);
-    };
-  }, [profilePreview]);
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setValidationError(null);
-    if (profile.password !== profile.confirmPassword) {
-      setValidationError("Passwords do not match.");
-      return;
-    }
-    try {
-      // TODO: sertakan profile.profilePhoto saat backend siap
-      await register(profile.fullname, profile.phoneNumber, profile.email, profile.password);
-      navigate("/login");
-    } catch (err) {
-      console.error(err);
-    }
+    console.log("Form Data:", formData);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {error && (
-        <Alert variant="destructive" className="mb-4">
-          <Terminal className="h-4 w-4" />
-          <AlertTitle>Registration Failed</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
-      {validationError && (
-        <Alert variant="destructive" className="mb-4">
-          <Terminal className="h-4 w-4" />
-          <AlertTitle>Validation Error</AlertTitle>
-          <AlertDescription>{validationError}</AlertDescription>
-        </Alert>
-      )}
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Username */}
+      <div>
+        <label className="text-sm font-medium" htmlFor="username">Username</label>
+        <Input id="username" name="username" placeholder="Masukkan username" value={formData.username} onChange={handleChange} />
+      </div>
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        name="profilePhoto"
-        accept="image/*"
-        className="hidden"
-        onChange={(e) => {
-          const file = e.target.files?.[0] || null;
-          setProfile(p => ({ ...p, profilePhoto: file }));
-          if (profilePreview) URL.revokeObjectURL(profilePreview);
-          setProfilePreview(file ? URL.createObjectURL(file) : null);
-        }}
-      />
-      {profilePreview && (
-        <div className="mb-4 flex flex-col items-center">
-          <img
-            src={profilePreview}
-            alt="Profile Preview"
-            className="h-24 w-24 rounded-full object-cover border"
-          />
-          <p className="mt-2 text-xs text-muted-foreground">
-            {profile.profilePhoto?.name}
-          </p>
-        </div>
-      )}
-      <Button
-        type="button"
-        variant="outline"
-        className="w-full mb-4"
-        onClick={() => fileInputRef.current?.click()}
-      >
-        {profile.profilePhoto ? "Change Profile Photo" : "Upload Profile Photo"}
-      </Button>
+      {/* NISN */}
+      <div>
+        <label className="text-sm font-medium" htmlFor="nisn">NISN</label>
+        <Input id="nisn" name="nisn" placeholder="Masukkan NISN" value={formData.nisn} onChange={handleChange} />
+      </div>
 
-      <InputForm
-        label="Fullname"
-        type="text"
-        placeholder="Insert your full name here"
-        name="fullname"
-        value={profile.fullname}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setProfile(p => ({ ...p, fullname: e.target.value }))
-        }
-      />
-      <InputForm
-        label="Phone Number"
-        type="number"
-        placeholder="Insert your Phone Number here"
-        name="phoneNumber"
-        value={profile.phoneNumber}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setProfile(p => ({ ...p, phoneNumber: e.target.value }))
-        }
-      />
-      <InputForm
-        label="Email"
-        type="email"
-        placeholder="example@gmail.com"
-        name="email"
-        value={profile.email}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setProfile(p => ({ ...p, email: e.target.value }))
-        }
-      />
-      <InputForm
-        label="Password"
-        type="password"
-        placeholder="*********"
-        name="password"
-        value={profile.password}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setProfile(p => ({ ...p, password: e.target.value }))
-        }
-      />
-      <InputForm
-        label="Confirm Password"
-        type="password"
-        placeholder="*********"
-        name="confirmPassword"
-        value={profile.confirmPassword}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setProfile(p => ({ ...p, confirmPassword: e.target.value }))
-        }
-      />
+      {/* Jurusan */}
+      <div>
+        <label className="text-sm font-medium">Jurusan</label>
+        <Select onValueChange={(value) => handleSelectChange("jurusan", value)}>
+          <SelectTrigger>
+            <SelectValue placeholder="Pilih Jurusan" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="rpl">RPL</SelectItem>
+            <SelectItem value="tkj">TKJ</SelectItem>
+            <SelectItem value="mm">MM</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
-      <Button
-        variant="default"
-        className="w-full text-xl py-5 rounded-sm"
-        type="submit"
-        disabled={loading}
-      >
-        {loading ? "Registering..." : "Register"}
-      </Button>
+      {/* Kelas */}
+      <div>
+        <label className="text-sm font-medium">Kelas</label>
+        <Select onValueChange={(value) => handleSelectChange("kelas", value)}>
+          <SelectTrigger>
+            <SelectValue placeholder="Pilih Kelas" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="x">X</SelectItem>
+            <SelectItem value="xi">XI</SelectItem>
+            <SelectItem value="xii">XII</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="text-sm font-medium" htmlFor="email">Email</label>
+        <Input id="email" name="email" type="email" placeholder="Masukkan email" value={formData.email} onChange={handleChange} />
+      </div>
+
+      {/* Password */}
+      <div>
+        <label className="text-sm font-medium" htmlFor="password">Password</label>
+        <Input id="password" name="password" type="password" placeholder="Masukkan password" value={formData.password} onChange={handleChange} />
+      </div>
+
+      {/* Tombol Register */}
+      <Button type="submit" className="w-full">Daftar</Button>
     </form>
   );
-}
+};
 
 export default FormRegister;

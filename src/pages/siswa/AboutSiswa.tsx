@@ -1,6 +1,6 @@
 import TeamCard from "@/components/fragments/TeamCard";
-import Footer from "@/components/layouts/FooterLayouts";
-import Navbar from "@/components/layouts/NavbarLayout";
+import Footer from "@/components/layouts/FooterSiswa";
+import Navbar from "@/components/layouts/SiswaNavbar";
 
 export function AboutPage() {
   return (

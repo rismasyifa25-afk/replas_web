@@ -1,7 +1,6 @@
-
 import React, { useState } from "react";
-import Footer from "@/components/layouts/FooterLayouts";
-import Navbar from "@/components/layouts/NavbarLayout";
+import Footer from "@/components/layouts/FooterSiswa";
+import Navbar from "@/components/layouts/SiswaNavbar";
 import { Button } from "@/components/ui/button";
 import {
   Mail,
@@ -25,7 +24,7 @@ const IconCircle = ({ children }) => (
   </div>
 );
 
-function UserEdit() {
+function ProfileSiswa() {
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [showSaldoModal, setShowSaldoModal] = useState(false);
 
@@ -50,7 +49,7 @@ function UserEdit() {
           className="w-full h-fit md:w-4/5 lg:w-3/5 xl:w-2/4 border rounded-lg flex flex-col md:flex-row shadow-lg"
           style={{ borderColor: "var(--primary)", backgroundColor: "var(--card)" }}
         >
-          {/* KIRI - PROFIL */}
+          {/* BAGIAN KIRI - PROFIL */}
           <div
             className="w-full md:w-2/4 flex flex-col justify-center p-5 rounded-t-lg md:rounded-l-lg md:rounded-tr-none text-white"
             style={{
@@ -128,7 +127,7 @@ function UserEdit() {
             </div>
           </div>
 
-          {/* KANAN - INFORMASI */}
+          {/* BAGIAN KANAN - INFORMASI */}
           <div
             className="w-full flex flex-col p-4 justify-center rounded-b-lg md:rounded-b-none md:rounded-r-lg"
             style={{ backgroundColor: "var(--card)", color: "var(--text-color)" }}
@@ -365,5 +364,4 @@ function UserEdit() {
   );
 }
 
-export default UserEdit;
-
+export default ProfileSiswa;

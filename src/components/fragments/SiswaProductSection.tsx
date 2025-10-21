@@ -1,32 +1,31 @@
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Pagination, Grid } from "swiper/modules"
-import "swiper/css"
-import "swiper/css/navigation"
-import "swiper/css/pagination"
-import "swiper/css/grid"
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Grid } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/grid";
 
-import { Button } from "@/components/ui/button"
-import Card from "@/components/fragments/Card"
-import { useId } from "react"
+import { Button } from "@/components/ui/button";
+import SiswaCard from "@/components/fragments/SiswaCard";
+import { useId } from "react";
 
 interface Product {
-  id: string | number
-  image: string
-  title: string
-  price: string
+  id: string | number;
+  image: string;
+  title: string;
+  price: string;
 }
 
 interface ProductSectionProps {
-  title: string
-  products: Product[]
-  rows?: number // jumlah baris grid swiper, default 2
+  title: string;
+  products: Product[];
+  rows?: number; // jumlah baris grid swiper, default 2
 }
 
-
-function ProductSection({ title, products, rows = 2 }: ProductSectionProps) {
+function SiswaProductSection({ title, products, rows = 2 }: ProductSectionProps) {
   // Unique ID supaya tombol dan pagination beda tiap section
-  const uniqueId = useId()
-  const paginationId = `swiper-pagination-${uniqueId}`
+  const uniqueId = useId();
+  const paginationId = `swiper-pagination-${uniqueId}`;
 
   return (
     <div className="mb-12 xl:mx-0 mx-12">
@@ -49,7 +48,6 @@ function ProductSection({ title, products, rows = 2 }: ProductSectionProps) {
 
       {/* Carousel */}
       <div className="relative">
-        {/* Swiper tanpa tombol panah */}
         <Swiper
           modules={[Pagination, Grid]}
           spaceBetween={20}
@@ -90,7 +88,7 @@ function ProductSection({ title, products, rows = 2 }: ProductSectionProps) {
         >
           {products.map((product) => (
             <SwiperSlide key={product.id}>
-              <Card {...product} />
+              <SiswaCard {...product} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -102,7 +100,7 @@ function ProductSection({ title, products, rows = 2 }: ProductSectionProps) {
         className="custom-pagination flex justify-center mt-6"
       ></div>
     </div>
-  )
+  );
 }
 
-export default ProductSection;
+export default SiswaProductSection;

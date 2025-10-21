@@ -4,16 +4,17 @@ import { ThemeToggle } from "../mode-toggle";
 import { useState } from "react";
 import { Menu, X, Camera } from "lucide-react";
 
-function Navbar() {
+function SiswaNavbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
 
   const navLinks = [
-    { to: "/", label: "Home" },
-    { to: "/store", label: "Store" },
-    { to: "/about", label: "About" },
-    { to: "/contact", label: "Contact" },
-    { to: "/service", label: "Service" },
+    { to: "/siswa", label: "Home" },
+    { to: "/siswa/store", label: "Store" },
+    { to: "/siswa/about", label: "About" },
+    { to: "/siswa/contact", label: "Contact" },
+
+    { to: "/siswa/printing", label: "Service" },
   ];
 
   return (
@@ -62,7 +63,7 @@ function Navbar() {
           </div>
 
           <div className="w-12 h-12 rounded-full border border-[#CD242C] overflow-hidden items-center justify-center md:block hidden">
-            <Link to="/useredit">
+            <Link to="/siswa/ProfileSiswa">
               <img
                 width={48}
                 height={48}
@@ -93,55 +94,51 @@ function Navbar() {
             </button>
           </div>
         </div>
-       <ul className="flex flex-col gap-4 p-4 cursor-pointer text-[color:var(--text-color)]">
-  {navLinks.map((link) => (
-    <Link
-      key={link.to}
-      to={link.to}
-      className={`font-bold ${
-        location.pathname === link.to ? "text-[#CD242C]" : ""
-      }`}
-      onClick={() => setIsSidebarOpen(false)}
-    >
-      {link.label}
-    </Link>
-  ))}
+        <ul className="flex flex-col gap-4 p-4 cursor-pointer text-[color:var(--text-color)]">
+          {navLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`font-bold ${
+                location.pathname === link.to ? "text-[#CD242C]" : ""
+              }`}
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
 
-  <div className="mt-4">
-    <Button
-      variant="outline"
-      className="cursor-pointer text-[#CD242C] hover:text-white w-full"
-      onClick={() => setIsSidebarOpen(false)}
-    >
-      <Link to="/login" className="w-full">
-        Login
-      </Link>
-    </Button>
-  </div>
+          <div className="mt-4">
+            <Button
+              variant="outline"
+              className="cursor-pointer text-[#CD242C] hover:text-white w-full"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              <Link to="/login" className="w-full">
+                Login
+              </Link>
+            </Button>
+          </div>
 
-  {/* Tambahkan bagian profil di bawah tombol login */}
-  <div className="flex items-center gap-3 mt-4 border-t border-gray-300 pt-4">
-    <Link
-      to="/useredit"
-      onClick={() => setIsSidebarOpen(false)}
-      className="flex items-center gap-3"
-    >
-      <img
-        src="/images/wongsigma.png"
-        alt="User"
-        className="w-10 h-10 rounded-full object-cover border border-[#CD242C]"
-      />
-      <span className="font-semibold">Profil Saya</span>
-    </Link>
-  </div>
-</ul>
-
-          
-       
+          {/* Tambahkan bagian profil di bawah tombol login */}
+          <div className="flex items-center gap-3 mt-4 border-t border-gray-300 pt-4">
+            <Link
+              to="/siswa/ProfileSiswa"
+              onClick={() => setIsSidebarOpen(false)}
+              className="flex items-center gap-3"
+            >
+              <img
+                src="/images/wongsigma.png"
+                alt="User"
+                className="w-10 h-10 rounded-full object-cover border border-[#CD242C]"
+              />
+              <span className="font-semibold">Profil Saya</span>
+            </Link>
+          </div>
+        </ul>
       </div>
-      
     </>
   );
 }
 
-export default Navbar;
+export default SiswaNavbar;

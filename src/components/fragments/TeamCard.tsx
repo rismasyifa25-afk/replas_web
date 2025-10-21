@@ -4,18 +4,28 @@ import React from "react";
 const TeamCard: React.FC = () => {
   const teamMembers = [
     {
-      name: "Ahmad Rafi'i",
-      role: "Back End, Business",
+      name: "Melvin",
+      role: "FullStack",
       image: "https://via.placeholder.com/150",
     },
     {
-      name: "Bintang Adi Alvaro",
-      role: "UI/UX, Copywriting",
+      name: "Syifa",
+      role: "FrontEnd",
       image: "https://via.placeholder.com/150",
     },
     {
-      name: "Dafa Ghaitsa Yogatama",
-      role: "Front End, Dev Ops",
+      name: "Arya",
+      role: "BackEnd",
+      image: "https://via.placeholder.com/150",
+    },
+        {
+      name: "Reifan",
+      role: "BackEnd",
+      image: "https://via.placeholder.com/150",
+    },
+        {
+      name: "Bunga",
+      role: "ProjectManagement",
       image: "https://via.placeholder.com/150",
     },
   ];

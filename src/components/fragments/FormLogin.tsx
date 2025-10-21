@@ -8,37 +8,42 @@ import { Terminal } from "lucide-react";
 
 function FormLogin() {
   const { login, loading, error } = useAuth();
-  const [email, setEmail] = useState("");
+  const [nisn, setNisn] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await login(email, password);
+      await login(nisn, password); // login pakai nisn & password
       navigate("/dashboard"); 
     } catch (err) {
-      console.error(err); 
+      console.error(err);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* Pesan error */}
       {error && (
         <Alert variant="destructive" className="mb-4">
           <Terminal className="h-4 w-4" />
-          <AlertTitle>Login Failed</AlertTitle>
+          <AlertTitle>Login Gagal</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
+
+      {/* Input NISN */}
       <InputForm
-        label="Email"
-        type="email"
-        placeholder="example@gmail.com"
-        name="email"
-        value={email}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+        label="NISN"
+        type="text"
+        placeholder="Masukkan NISN anda"
+        name="nisn"
+        value={nisn}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNisn(e.target.value)}
       />
+
+      {/* Input Password */}
       <InputForm
         label="Password"
         type="password"
@@ -47,13 +52,15 @@ function FormLogin() {
         value={password}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
       />
+
+      {/* Tombol Login */}
       <Button
         variant="default"
         className="w-full text-xl py-5 rounded-sm"
         type="submit"
         disabled={loading}
       >
-        {loading ? "Logging in..." : "Login"}
+        {loading ? "Memproses..." : "Login"}
       </Button>
     </form>
   );
