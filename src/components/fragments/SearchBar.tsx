@@ -23,7 +23,7 @@ function SearchBar(props: any) {
 
   return (
     <>
-      <div className="w-full h-auto flex justify-center items-center mt-20 mb-20 gap-2 px-6 md:px-0">
+      <div className="w-full h-auto flex justify-center items-center gap-2 px-6 md:px-0">
         <InputSearch placeholder={placeholder} />
         <Button variant={"default"} size="lg" name="search">
           <h1 className="font-bold">Search</h1>
@@ -53,7 +53,7 @@ function SearchBar(props: any) {
               value={selectedCategory}
               onValueChange={(v) => setSelectedCategory(v)}
             >
-              {["buku", "makanan", "seragam"].map((cat) => (
+              {["Atk", "buku", "makanan", "seragam"].map((cat) => (
                 <DropdownMenuRadioItem key={cat} value={cat}>
                   {cat.charAt(0).toUpperCase() + cat.slice(1)}
                 </DropdownMenuRadioItem>

@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 function Footer() {
   const navLinks = [
     { to: "/siswa", label: "Home" },
-    { to: "/siswa/store", label: "Store" },
     { to: "/siswa/about", label: "About" },
-    { to: "/siswa/contact", label: "Contact" },
+    { to: "/siswa/store", label: "Store" },
     { to: "/siswa/printing", label: "Service" },
+    { to: "/siswa/contact", label: "Contact" },
   ];
 
   return (

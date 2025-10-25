@@ -1,136 +1,124 @@
-import Footer from "@/components/layouts/FooterLayouts";
+import React from "react";
 import Navbar from "@/components/layouts/NavbarLayout";
-import { Input } from "@/components/ui/input";
-import { ChevronDown, File } from "lucide-react";
-
-import * as React from "react";
-import { Check } from "lucide-react";
-
-import { cn } from "@/lib/utils";
+import Footer from "@/components/layouts/FooterLayouts";
 import { Button } from "@/components/ui/button";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Phone, Printer, ShoppingCart, CreditCard, Recycle, Award } from "lucide-react";
 
-const frameworks = [
+const services = [
   {
-    value: "a4",
-    label: "A4",
+    title: "Layanan Printing",
+    description: "Cetak dokumen, tugas, dan materi belajar dengan kualitas tinggi dan harga terjangkau.",
+    icon: Printer,
+    image: "https://via.placeholder.com/300x200?text=Printing",
   },
   {
-    value: "a3",
-    label: "A3",
+    title: "Pembelian Online",
+    description: "Beli produk koperasi secara online dengan mudah dan praktis dari mana saja.",
+    icon: ShoppingCart,
+    image: "https://via.placeholder.com/300x200?text=Online+Shopping",
   },
   {
-    value: "berwarna",
-    label: "Berwarna",
+    title: "Pengambilan di BCS",
+    description: "Ambil pesanan Anda di Bank Sampah Cerdas (BCS) sekolah tanpa ribet.",
+    icon: Recycle,
+    image: "https://via.placeholder.com/300x200?text=Pickup+BCS",
   },
   {
-    value: "hitamputih",
-    label: "Hitam Putih",
+    title: "Pembayaran Praktis",
+    description: "Bayar dengan poin, tunai, atau digital payment untuk kemudahan transaksi.",
+    icon: CreditCard,
+    image: "https://via.placeholder.com/300x200?text=Easy+Payment",
+  },
+  {
+    title: "Bank Sampah",
+    description: "Tukar botol plastik dengan poin untuk mendukung lingkungan bersih.",
+    icon: Recycle,
+    image: "https://via.placeholder.com/300x200?text=Bank+Sampah",
+  },
+  {
+    title: "Konversi Poin",
+    description: "Konversi poin Anda menjadi produk atau layanan di koperasi sekolah.",
+    icon: Award,
+    image: "https://via.placeholder.com/300x200?text=Point+Conversion",
   },
 ];
 
 function ServicePage() {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
-
   return (
     <>
       <Navbar />
-      <div className="h-screen flex items-center justify-center py-10">
-        <div className="flex flex-col md:flex-row gap-2 w-full lg:mx-0 mx-10 max-w-4xl p-4 rounded-xl border border-[#CD242C]">
-          <div className="flex-1 flex items-center justify-center">
-            <div className="w-full h-full py-12 md:py-0 border-2 border-dashed border-red-600 flex flex-col items-center justify-center text-center cursor-pointer rounded-lg">
-              <File className="w-16 h-16 text-red-600 mx-auto mb-2" />
-              <span className="text-[color:var(--tulisan-nonprimary)]">Tambahkan File</span>
+      <div className="w-full max-w-7xl mx-auto px-4 py-16">
+        {/* Title Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            Layanan <span className="text-red-600">Kami</span>
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Jelajahi berbagai layanan yang kami sediakan untuk mendukung kegiatan sekolah dan lingkungan.
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {services.map((service, index) => (
+            <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+              <CardHeader className="pb-2">
+                <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mb-4">
+                  <service.icon className="w-8 h-8 text-red-600" />
+                </div>
+                <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">
+                  {service.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  className="w-full h-32 object-cover rounded-md mb-4"
+                />
+                <CardDescription className="text-gray-600 dark:text-gray-300 mb-4">
+                  {service.description}
+                </CardDescription>
+                <Button variant="outline" className="w-full">
+                  Lihat Detail
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Call to Action Section */}
+        <section className="bg-red-50 dark:bg-red-900/20 rounded-xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
+          <img 
+            src="https://via.placeholder.com/400x300?text=Support+Team" 
+            alt="Support Team" 
+            className="w-full md:w-1/2 rounded-lg shadow-lg object-cover"
+          />
+          <div className="text-center md:text-left">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Butuh Bantuan?
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+              Kami siap membantu Anda dengan layanan terbaik. Hubungi kami sekarang!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start">
+              <div className="flex items-center gap-2 text-red-600">
+                <Phone className="w-5 h-5" />
+                <span>+62 812-3456-7890</span>
+              </div>
+              <Button className="bg-red-600 hover:bg-red-700">
+                Hubungi Kami
+              </Button>
             </div>
           </div>
-          <form className="flex-1 flex flex-col gap-4 justify-center">
-            <Input
-              type="text"
-              name="name"
-              className="bg-transparent border-[#CD242C] placeholder:text-[#CD242C] font-bold"
-              placeholder="Nama"
-            />
-            <Input
-              type="number"
-              name="contact"
-              className="bg-transparent border-[#CD242C] placeholder:text-[#CD242C] font-bold overflow-hidden 
-                [&::-webkit-outer-spin-button]:appearance-none 
-                [&::-webkit-inner-spin-button]:appearance-none
-                [-moz-appearance:textfield]"
-              placeholder="Nomor Telepon"
-            />
-
-            <Popover open={open} onOpenChange={setOpen}>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={open}
-                  className="w-full justify-between text-[#DC2626] cursor-pointer"
-                >
-                  {value
-                    ? frameworks.find((framework) => framework.value === value)
-                        ?.label
-                    : "Jenis Cetak"}
-                  <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-100" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 ">
-                <Command>
-                  <CommandInput placeholder="Cari Jenis Cetak..." />
-                  <CommandEmpty>Not Found.</CommandEmpty>
-                  <CommandGroup>
-                    {frameworks.map((framework) => (
-                      <CommandItem
-                        key={framework.value}
-                        value={framework.value}
-                        onSelect={(currentValue: any) => {
-                          setValue(currentValue === value ? "" : currentValue);
-                          setOpen(false);
-                        }}
-                      >
-                        <Check
-                          className={cn(
-                            "mr-2 h-4 w-4",
-                            value === framework.value
-                              ? "opacity-100"
-                              : "opacity-0"
-                          )}
-                        />
-                        {framework.label}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </Command>
-              </PopoverContent>
-            </Popover>
-
-            <Input
-              type="number"
-              name="jumlah"
-              className="bg-transparent border-[#CD242C] placeholder:text-[#CD242C] font-bold overflow-hidden 
-                [&::-webkit-outer-spin-button]:appearance-none 
-                [&::-webkit-inner-spin-button]:appearance-none
-                [-moz-appearance:textfield]"
-                placeholder="Jumlah Print"
-            />
-            <div className="flex w-full md:w-1/3">
-              <Button variant={'default'} className="font-bold w-full"> Buat Pesanan</Button>
-            </div>
-          </form>
-        </div>
+        </section>
       </div>
       <Footer />
     </>

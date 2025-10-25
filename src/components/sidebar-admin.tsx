@@ -20,29 +20,49 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Home, LogOut, File, Settings, User, ChevronUp, ShoppingCart } from "lucide-react"
+import { Home, LogOut, Printer, Settings, User, ChevronUp, ShoppingCart, Monitor, Package, History } from "lucide-react"
 import { ThemeToggle } from "./mode-toggle"
 import { Link, useLocation } from "react-router-dom"
 
 const items = [
   {
-    title: "Quick Statistic",
-    url: "/dashboard",
+    title: "Dashboard",
+    url: "/AdminDashboard",
     icon: Home,
     badge: null
   },
   {
-    title: "Printing dashboard",
-    url: "/dashboard/printing",
-    icon: File,
+    title: "Printing",
+    url: "/AdminDashboard/printing",
+    icon: Printer,
     badge: null,
   },
   {
-    title: "Barang Jualan",
-    url: "/dashboard/upload-item",
+    title: "Upload Product",
+    url: "/AdminDashboard/upload-item",
+    icon: Package,
+    badge: null,
+  },
+  {
+    title: "Pemesanan Produk",
+    url: "/AdminDashboard/orders/product",
     icon: ShoppingCart,
     badge: null,
   },
+  {
+    title: "History Konversi Poin",
+    url: "/AdminDashboard/orders/history",
+    icon: History,
+    badge: null,
+  },
+  {
+    title: "Monitoring",
+    url: "/AdminDashboard/monitoring",
+    icon: Monitor,
+    badge: null,
+  },
+  
+
 ]
 
 export function AppSidebar() {
@@ -63,8 +83,8 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => {
                 let isActive = false
-                if (item.url === "/dashboard") {
-                  isActive = currentPath === "/dashboard"
+                if (item.url === "/AdminDashboard") {
+                  isActive = currentPath === "/AdminDashboard"
                 } else {
                   isActive = currentPath === item.url || currentPath.startsWith(item.url + "/")
                 }
@@ -98,7 +118,7 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link to="/dashboard/settings">
+                  <Link to="/AdminDashboard/settings">
                     <Settings />
                     <span>Settings</span>
                   </Link>
@@ -149,13 +169,13 @@ export function AppSidebar() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link to="/dashboard/profile" className="flex items-center gap-2">
+                  <Link to="/AdminDashboard/profile" className="flex items-center gap-2">
                     <User className="size-4" />
                     Profile
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/dashboard/settings" className="flex items-center gap-2">
+                  <Link to="/AdminDashboard/settings" className="flex items-center gap-2">
                     <Settings className="size-4" />
                     Settings
                   </Link>

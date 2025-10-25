@@ -10,15 +10,15 @@ function Navbar() {
 
   const navLinks = [
     { to: "/", label: "Home" },
-    { to: "/store", label: "Store" },
     { to: "/about", label: "About" },
-    { to: "/contact", label: "Contact" },
+    { to: "/store", label: "Store" },
     { to: "/service", label: "Service" },
+    { to: "/contact", label: "Contact" },
   ];
 
   return (
     <>
-      <nav className="w-full flex h-8 justify-between items-center md:px-12 px-4 py-8 bg-[color:var(--navbar)] backdrop-blur-xl shadow-lg sticky top-0 z-1000 mb-12">
+      <nav className="w-full flex h-8 justify-between items-center md:px-12 px-4 py-8 bg-[color:var(--navbar)] backdrop-blur-xl shadow-lg sticky top-0 z-1000">
         <div className="flex items-center">
           <img
             width={120}

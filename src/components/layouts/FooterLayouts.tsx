@@ -42,7 +42,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="flex flex-1 flex-col min-w-0 mb-6 md:mb-0">
+        <div className="flex flex-1 flex-col min-w-0 mb-6 md:mb-0 ">
           <h1 className="text-2xl font-semibold mb-2 text-[#CD242C] ">
             Social Media
           </h1>

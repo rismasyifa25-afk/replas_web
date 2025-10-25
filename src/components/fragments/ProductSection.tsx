@@ -31,7 +31,7 @@ function ProductSection({ title, products, rows = 2 }: ProductSectionProps) {
   return (
     <div className="mb-12 xl:mx-0 mx-12">
       {/* Section Title */}
-      <div className="mt-8 mb-6 flex justify-between items-center">
+      <div className="mt-2 mb-6 flex justify-between items-center">
         <h2 className="text-[35px] font-bold">{title}</h2>
         <Button variant="outline" size="sm" className="rounded-md bg-transparent">
           More

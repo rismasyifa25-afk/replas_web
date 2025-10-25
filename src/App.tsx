@@ -1,54 +1,49 @@
-import { createRoot } from 'react-dom/client'
-import './assets/index.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { ThemeProvider } from "@/components/theme-provider"
+import { createRoot } from "react-dom/client";
+import "./assets/index.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // ===== Pages =====
-import Index from './pages' // Home utama
-import LoginPage from './pages/auth/login'
-import RegisterPage from './pages/auth/register'
-import Dashboard from './pages/dashboard'
-import ServicePage from './pages/services'
-import ContactPage from './pages/contact'
-import ProductPage from './pages/store'
-import AboutPage from './pages/aboutUs'
-import UserEdit from "./pages/profile/userEdit"
-import HistoryPage from "./pages/profile/history"
-import ProductDetailPage from './pages/product'
-import PrintingDashboard from './pages/dashboard/printing'
-import UploadItem from './pages/dashboard/uploadItem'
-import BankSampah from './pages/BankSampah'
-import ReceiptPage from './pages/receipt'
+import Index from "./pages"; // Home utama
+import LoginPage from "./pages/auth/login";
+import RegisterPage from "./pages/auth/register";
+import ServicePage from "./pages/services";
+import ContactPage from "./pages/contact";
+import ProductPage from "./pages/store";
+import AboutPage from "./pages/aboutUs";
+import UserEdit from "./pages/profile/userEdit";
+import HistoryPage from "./pages/profile/history";
+import ProductDetailPage from "./pages/product";
+import BankSampah from "./pages/BankSampah";
+import ReceiptPage from "./pages/receipt";
 
 // ===== Siswa =====
-import SiswaPage from './pages/siswa'
-import SiswaPrintingPage from './pages/siswa/printing'
-import AboutSiswa from './pages/siswa/AboutSiswa'
-import ContactSiswa from './pages/siswa/ContactSiswa'
-import ProfileSiswa from './pages/siswa/ProfileSiswa'
-import BankSampahSiswa from './pages/siswa/bank-sampah'
+import SiswaPage from "./pages/siswa";
+import SiswaPrintingPage from "./pages/siswa/printing";
+import AboutSiswa from "./pages/siswa/AboutSiswa";
+import ContactSiswa from "./pages/siswa/ContactSiswa";
+import ProfileSiswa from "./pages/siswa/ProfileSiswa";
+import BankSampahSiswa from "./pages/siswa/bank-sampah";
 
-// ===== Admin =====
-import AdminLayout from './pages/admin/layout'
-import AdminDashboard from './pages/admin/AdminDashboard'
-import AdminProduct from './pages/admin/Product'
-import AdminUsers from './pages/admin/users'
-import AdminOrdersProduct from './pages/admin/orders/product'
-import AdminOrdersPrinting from './pages/admin/orders/printing'
-import AdminOrdersHistory from './pages/admin/orders/history'
-import MonitoringPage from './pages/admin/reports/monitoring'
-import SalesReportPage from './pages/admin/reports/sales'
-import ProductDetailSiswaPage from './pages/siswa/ProductDetailSiswaPage'
-import StoreSiswa from './pages/siswa/StoreSiswa'
-import RoomPage from './pages/room/[id]'
-import AdminLogin from './pages/admin/AdminLogin'
-import AdminProfile from './pages/admin/profile'
+// ===== Admin Dashboard =====
+import Layout from "./pages/AdminDashboard/layout";
+import AdminDashboard from "./pages/AdminDashboard";
+import PrintingDashboard from "./pages/AdminDashboard/printing";
+import UploadItem from "./pages/AdminDashboard/uploadItem";
+import MonitoringPage from "./pages/AdminDashboard/monitoring";
+import AdminProfile from "./pages/AdminDashboard/profile";
+import AdminOrdersProduct from "./pages/AdminDashboard/orders/product";
+import AdminOrdersHistory from "./pages/AdminDashboard/orders/history";
+import AdminSettings from "./pages/AdminDashboard/settings";
+import ProductDetailSiswaPage from "./pages/siswa/ProductDetailSiswaPage";
+import StoreSiswa from "./pages/siswa/StoreSiswa";
+import RoomPage from "./pages/room/[id]";
+import NotFound from "./pages/NotFound";
 
 createRoot(document.getElementById("root")!).render(
   <ThemeProvider>
     <BrowserRouter>
       <Routes>
-
         {/* ===== HOME PAGE ===== */}
         <Route path="/" element={<Index />} />
 
@@ -82,28 +77,20 @@ createRoot(document.getElementById("root")!).render(
         {/* ===== ROOM ===== */}
         <Route path="/room/:id" element={<RoomPage />} />
 
-
-
-        {/* ===== DASHBOARD (USER/PRINTING) ===== */}
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/dashboard/printing" element={<PrintingDashboard />} />
-        <Route path="/dashboard/upload-item" element={<UploadItem />} />
-
-        {/* ===== ADMIN ===== */}
-        <Route path="/admin" element={<AdminLayout />}>
+        {/* ===== ADMIN DASHBOARD ===== */}
+        <Route path="/dashboard" element={<Layout />}>
           <Route index element={<AdminDashboard />} />
-          <Route path="users" element={<AdminUsers />} />
-          <Route path="product" element={<AdminProduct />} />
+          <Route path="printing" element={<PrintingDashboard />} />
+          <Route path="upload-item" element={<UploadItem />} />
           <Route path="orders/product" element={<AdminOrdersProduct />} />
-          <Route path="orders/printing" element={<AdminOrdersPrinting />} />
           <Route path="orders/history" element={<AdminOrdersHistory />} />
-          <Route path="reports/monitoring" element={<MonitoringPage />} />
-          <Route path="reports/sales" element={<SalesReportPage />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/profile" element={<AdminProfile />} />
-
+          <Route path="monitoring" element={<MonitoringPage />} />
+          <Route path="profile" element={<AdminProfile />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
 
+        {/* ===== 404 NOT FOUND ===== */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </ThemeProvider>

@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-function ContactPage() {
+function ContactSiswa() {
   return (
     <div className="">
       <Navbar />
-      <div className="">
+      <div className="w-7xl mx-auto">
         <div className="h-fit block justify-center py-10">
           <div className="text-center w-full ">
-            <h1 className="xl:text-9xl lg:text-8xl sm:text-7xl text-4xl  font-extrabold text-[color:var(--text-color)">
+            <h1 className="xl:text-9xl lg:text-8xl sm:text-7xl text-4xl  font-extrabold text-[color:var(--text-color)]">
               LET'S <span className="text-[color:var(--primary)]">CONNECT</span>
             </h1>
             <p className="sm:text-2xl text-md md:px-0 px-10  mt-2 text-[color:var(--tulisan-nonprimary)]">
@@ -47,4 +47,4 @@ function ContactPage() {
   );
 }
 
-export default ContactPage;
+export default ContactSiswa;

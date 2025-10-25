@@ -8,7 +8,7 @@ function ContactPage() {
   return (
     <div className="">
       <Navbar />
-      <div className="">
+      <div className="w-7xl mx-auto">
         <div className="h-fit block justify-center py-10">
           <div className="text-center w-full ">
             <h1 className="xl:text-9xl lg:text-8xl sm:text-7xl text-4xl  font-extrabold text-[color:var(--text-color)">
